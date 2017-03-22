@@ -66,6 +66,15 @@ def star_map():
     return map(star_or_bang, range(10))
 
 
+def my_map_exercise():
+    on_the_wall = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, "no"]
+
+    def green_bottles(howmanybottles):
+        print ("There are " + green_bottles(howmanybottles) +
+               " on the wall.")
+    print (map(green_bottles, on_the_wall))
+
+
 def loops_1c(number_of_items=5, symbol="#"):
     """Respond to variables.
 
