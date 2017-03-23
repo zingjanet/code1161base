@@ -134,7 +134,7 @@ def loops_3():
             number_row.append(str(i))
         number_square.append(number_row)
 
-        return number_square
+    return number_square
 
 
 def loops_4():
@@ -156,10 +156,9 @@ def loops_4():
     for i in range(10):
         number_row = []
         for j in range(10):
-            number_row.append(j)
+            number_row.append(str(j))
         number_square.append(number_row)
 
-    print(number_square)
     return number_square
 
 
@@ -216,12 +215,12 @@ def loops_6():
     TIP: look out for the starting condition.
     """
     the_wedge = []
-
     for i in range(10):
         row = []
         for j in range(i + 1):
-            row.append(j)
+            row.append(str(j))
         the_wedge.append(row)
+
     return the_wedge
 
 
@@ -246,7 +245,16 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    pass
+    pyramidList = []
+    for index in range(5):
+        stacklist = []
+        for j in range(9):
+            if (5 - index - 2 < j and j < index + 5):
+                stacklist.append("*")
+            else:
+                stacklist.append(" ")
+        pyramidList.append(stacklist)
+    return pyramidList
 
 
 def lp(some_kind_of_list, exercise_name):
