@@ -11,7 +11,7 @@ import mock
 import os
 import random
 import sys
-sys.path.append(os.path.dirname(__file__)[:-5])
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codeHelpers import completion_message
 from codeHelpers import nyan_cat
 from codeHelpers import test
@@ -24,7 +24,7 @@ def syntax_error_message(exNumber, e):
     """Give a readable error message."""
     print("There is a syntax error in exercise{}\n{}".format(exNumber, str(e)))
     print('\n{s:{c}^{n}}\n{s:{c}^{n}}'.format(n=50, c='*', s=""))
-    print("WARNING: there are more tests, but they won't run")
+    print("WARNING: there might be more tests, but they won't run")
     print("until you fix the syntax errors in exercise{}.py".format(exNumber))
     print('{s:{c}^{n}}\n{s:{c}^{n}}\n'.format(n=50, c='*', s=""))
 
@@ -34,7 +34,7 @@ def test_stubborn_asker(low, high):
     try:
         import exercise1
     except Exception as e:
-        return syntax_error_message(e)
+        return syntax_error_message(4, e)
 
     mockInputs = range(low - 25, high + 20, 5)
     try:
@@ -49,18 +49,23 @@ def test_not_number_rejector():
     try:
         import exercise1
     except Exception as e:
-        return syntax_error_message(e)
+        return syntax_error_message(1, e)
 
     mockInputs = ["aword", [1, 2, 3], {"an": "object"}, 40]
     try:
         with mock.patch('__builtin__.raw_input', side_effect=mockInputs):
-            return exercise1.not_number_rejector()
+            return exercise1.not_number_rejector("Testing some values:")
     except Exception as e:
         print("exception:", e)
 
 
 def test_super_asker(low, high):
     """Test the super asker function."""
+    try:
+        import exercise1
+    except Exception as e:
+        return syntax_error_message(1, e)
+
     dirty_things = ["aword", [1, 2, 3], {"an": "object"}]
     neat_range = range(low - 25, high + 20, 5)
     mockInputs = dirty_things + neat_range
@@ -79,7 +84,7 @@ def test_example_guessingGame():
     try:
         import exercise2
     except Exception as e:
-        return syntax_error_message(e)
+        return syntax_error_message(2, e)
     upperBound = 5
     guesses = range(5+1)
     mockInputs = [upperBound] + guesses
@@ -93,6 +98,11 @@ def test_example_guessingGame():
 def test_advanced_guessingGame(mockInputs):
     """Test the advanced_guessingGame function."""
     try:
+        import exercise3
+    except Exception as e:
+        return syntax_error_message(3, e)
+
+    try:
         with mock.patch('__builtin__.raw_input', side_effect=mockInputs):
             return exercise3.advancedGuessingGame() == "You got it!"
     except Exception as e:
@@ -104,18 +114,28 @@ def test_binary_search(low, high, actual):
 
     checks to see that it's searching better than O(log n)
     """
-    BASE2 = 2
-    b = exercise4.binary_search(low, high, actual)
-    b["WorstCaseO"] = math.log(high - low, BASE2)
-    print(b)
-    if b is not None:
-        return b["tries"] < b["WorstCaseO"]
-    else:
-        return False
+    try:
+        import exercise4
+        BASE2 = 2
+        b = exercise4.binary_search(low, high, actual)
+        b["WorstCaseO"] = math.log(high - low, BASE2)
+        print(b)
+        if b is not None:
+            return b["tries"] < b["WorstCaseO"]
+        else:
+            return False
+    except Exception as e:
+        return syntax_error_message(4, e)
+
 
 
 def vis_binary_search_performance():
     """Provide a visualisation of the performance of the binary search."""
+    try:
+        import exercise4
+    except Exception as e:
+        return syntax_error_message(4, e)
+
     import matplotlib.pyplot as plt
     BASE2 = 2
     results = []
@@ -309,6 +329,7 @@ def theTests(path_to_code_to_check=""):
             try_these.append((0, 100, random.randint(1, 99)))
 
         for tv in try_these:
+            print(tv)
             try:
                 testResults.append(
                     test(test_binary_search(*tv),  # *tv unpacks the tuple
@@ -316,7 +337,8 @@ def theTests(path_to_code_to_check=""):
             except Exception:
                 print("********\n\nfailed:", tv)
                 print(Exception)
-                raise ValueError("********\n\nfailed: {}".format(tv))
+                # raise ValueError("********\n\nfailed: {}".format(tv))
+                testResults.append(False)
 
         # if the binary search is working, show a graph of guess numbers
         if test(test_binary_search(1, 10, 5), ""):
@@ -330,7 +352,7 @@ def theTests(path_to_code_to_check=""):
         message = "Cowabunga! You've got all the tests passing!"
         completion_message(message, len(message) + 2)
 
-    return {"of_total": sum(testResults), "mark": len(testResults)}
+    return {"of_total": len(testResults), "mark": sum(testResults)}
 
 
 if __name__ == "__main__":

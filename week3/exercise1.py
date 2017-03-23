@@ -12,7 +12,11 @@ def loop_ranger(start, stop=None, step=1):
 
     Do this using any method apart from just using range()
     """
-    pass
+    list = ['']
+    while start < stop:
+        print(start)
+        list.append(start)
+        start = start+step
 
 
 def lone_ranger(start, stop, step):
@@ -29,7 +33,9 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    pass
+    while start < stop:
+        print(start)
+        start += 2
 
 
 def gene_krupa_range(start, stop, even_step, odd_step):
@@ -38,7 +44,17 @@ def gene_krupa_range(start, stop, even_step, odd_step):
     make a list that instead of having evenly spaced steps
     has odd steps be one size and even steps be another.
     """
-    pass
+    x = 1
+    list = ['']
+    while start < stop:
+        print(start)
+
+        y = x % 2
+        x += 1
+        if y != 0:
+           start += 1
+        elif y == 0:
+           start += 2
 
 
 def stubborn_asker(low, high):
@@ -81,7 +97,16 @@ def super_asker(low, high):
     Combine stubborn_asker and not_number_rejector to make a function
     that does it all!
     """
-    pass
+    while True:
+        input_number = input('Please input number')
+        if input_number.isdigit():
+            numberlen = len(input_number)
+            if(low <= numberlen and numberlen <= high):
+                print('ok')
+            else:
+                print('Out of range')
+        else:
+                print('Please enter a number')
 
 
 if __name__ == "__main__":
