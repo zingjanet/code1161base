@@ -109,7 +109,7 @@ def super_asker(low, high):
     Combine stubborn_asker and not_number_rejector to make a function
     that does it all!
     """
-    message = "Give me a number between {low},and {high}:".format(low=low,
+    message = "Give me a number between {low} and {high}:".format(low=low,
                                                                   high=high)
     while True:
         try:
@@ -118,10 +118,10 @@ def super_asker(low, high):
                 print ("Thank you! {} looks good.".format(input_number))
                 return input_number
             else:
-                print ("{input} isn't between {low}, and {high}. Try again:"
+                print ("{input} isn't between {low} and {high}. Try again:"
                        .format(input=input_number, low=low, high=high))
         except Exception as e:
-            print ("Hmm, it's not a number. Try again. ({})".format(e))
+            print ("Wow, it's not a number. Try again. ({})".format(e))
 
 
 if __name__ == "__main__":
