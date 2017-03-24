@@ -14,9 +14,9 @@ def loop_ranger(start, stop=None, step=1):
     """
     list = ['']
     while start < stop:
-        print(start)
+        return(start)
         list.append(start)
-        start = start+step
+        start = start+1
 
 
 def lone_ranger(start, stop, step):
