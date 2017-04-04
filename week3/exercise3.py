@@ -48,7 +48,7 @@ def advancedGuessingGame():
 
     while not guessed:
         guessedNumber = super_asker(lowerBound, upperBound)
-        print("you guessed {},".format(guessedNumber),)
+        print("you guessed {},".format(guessedNumber))
         if guessedNumber == actualNumber:
             print("you got it!! It was {}".format(actualNumber))
             guessed = True

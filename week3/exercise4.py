@@ -2,7 +2,7 @@
 """Week 3, Exercise 4."""
 from __future__ import division
 from __future__ import print_function
-import math
+# import math
 # import time
 
 
@@ -29,23 +29,20 @@ def binary_search(low, high, actual_number):
     """
     sum_dict = {"guess": 0, "tries": 0}
     found = False
-
     binary_min = low
     binary_max = high - low
-    while binary_min < binary_max and not found:
+    while not found:
         midpoint = int((binary_min + binary_max)/2)
         sum_dict["guess"] += 1
         if midpoint == actual_number:
             found = True
             return midpoint
-            sum_dict["tries"] = actual_number
+            sum_dict["tries"] = midpoint
         elif midpoint > actual_number:
-            binary_max = midpoint - 1
+            binary_max = midpoint
         elif midpoint < actual_number:
-            binary_min = midpoint + 1
-        else:
-            return -1
-    return sum_dict
+            binary_min = midpoint
+        return sum_dict
 
 
 if __name__ == "__main__":
