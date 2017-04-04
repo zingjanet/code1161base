@@ -31,9 +31,11 @@ def binary_search(low, high, actual_number):
     found = False
     binary_min = low
     binary_max = high - low
+    count = 0
     while not found:
         midpoint = int((binary_min + binary_max)/2)
-        sum_dict["guess"] += 1
+        count += 1
+        sum_dict["guess"] = count
         if midpoint == actual_number:
             found = True
             return midpoint
