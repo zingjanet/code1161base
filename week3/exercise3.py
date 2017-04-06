@@ -50,28 +50,20 @@ def advancedGuessingGame():
                 print("Not an Integer")
         continue
 
-     actualNumber  = random.randint(lowerBound, upperBound)
+    actualNumber = random.randint(lowerBound, upperBound)
 
-     guessed  =  False
+    guessed = False
 
-     while not guessed:
-         try:
-         guessedNumber  =  int(raw_input("Have a guess: "))
-         if guessedNumber == actualNumber:
-             print("You win, {} was the answer!".format(actualNumber))
-             guessed  =  True
-         elif guessedNumber <= lowerBound:
-             print("No, {} is too low to be valid!".format(guessedNumber))
-         elif guessedNumber >= upperBound:
-             print("No, {} is too high to be valid!".format(guessedNumber))
-         elif guessedNumber < actualNumber:
-             print("Guess higher!")
-         elif guessedNumber > actualNumber:
-             print("Guess lower!")
-         except:
-             print("Not an Integer")
-         continue
-     return "You got it!"
+    while not guessed:
+        try:
+            input_number = int(raw_input("Guess a number plz:"))
+            if lowerBound < input_number < upperBound:
+                print("{} looks good, thank you.".format(actualNumber))
+                return input_number
+            else:
+                print("Try agian please")
+        except Exception as e:
+            print("What do you enter?Give me a number.".format(e))
 
 
 if __name__ == "__main__":
