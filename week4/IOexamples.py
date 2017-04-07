@@ -35,6 +35,7 @@ def be_cool_for_ever(name, file_path):
 
 be_cool_for_ever("Ben", "ben_is_cool.txt")
 be_cool_for_ever("Ben", "week4/ben_is_cool.lol_UR_joking")
+be_cool_for_ever("jj", "../jj_is_cool.lol_UR_joking")
 
 
 def who_is_cool(file_path):
@@ -47,7 +48,7 @@ def who_is_cool(file_path):
     history_book.close()
 
 
-who_is_cool("ben_is_cool.txt")
+who_is_cool("../jj_is_cool.lol_UR_joking")
 
 
 # some JSON examples:
@@ -113,4 +114,4 @@ def dig_up_capsule(file_path):
         return False
 
 
-dig_up_capsule("under_the_patio.json")
+dig_up_capsule("what_is_dumpes.json")
