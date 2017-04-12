@@ -150,7 +150,20 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    mode = "r"
+    laser_off = open(LOCAL + "/Trispokedovetiles(laser).gcode", mode)
+    data = laser_off.readlines()
+    laser_off.close()
+    command = "M10 P1"
+    count = 0
+    for line in data:
+        if command in line:
+            count += 1
+
+    mode = "w"
+    count_number = open(LOCAL + "/lasers.pew", mode)
+    count_number.write(str(count))
+    count_number.close()
 
 
 if __name__ == "__main__":
