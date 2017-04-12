@@ -56,8 +56,8 @@ def get_some_details():
     data = json.loads(json_data)
     last = data["results"][0]["name"]["last"]
     password = data["results"][0]["login"]["password"]
-    ID = data["results"][0]["location"]["postcode"]
-    postcode = data["results"][0]["id"]["value"]
+    postcode = data["results"][0]["location"]["postcode"]
+    ID = data["results"][0]["id"]["value"]
 
     return {"lastName": last,
             "password": password,
