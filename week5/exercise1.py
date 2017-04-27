@@ -171,18 +171,18 @@ def tell_me_about_this_right_triangle(facts_dictionary):
     pattern = ("This triangle is {area}{units}²\n"
                "It has a perimeter of {perimeter}{units}\n"
                "This is a {aspect} triangle.\n")
-    height = facts_dictionary["height"]
-    base = facts_dictionary["height"]
-    facts = pattern.format(**facts_dictionary)
-    if height > base:
-        ret = tall.format(**facts_dictionary)
-    elif height == base:
-        ret = equal.format(**facts_dictionary)
-    else:
-        ret = wide.format(**facts_dictionary)
 
-    ret = ret + "\n" + facts
-    return ret
+    facts = pattern.format(**facts_dictionary)
+
+    if facts_dictionary['aspect'] == "tall":
+        tall_info = tall.format(**facts_dictionary)
+        return (tall_info + facts)
+    elif facts_dictionary['aspect'] == "wide":
+        wide_info = wide.format(**facts_dictionary)
+        return (wide_info + facts)
+    else:
+        equal_info = equal.format(**facts_dictionary)
+    return (equal_info + facts)
 
 
 def triangle_master(base,
