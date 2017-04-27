@@ -28,13 +28,11 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
+    path = CWD + "/week1/pySuccessMessage.json"
     mode = "r"
-    file_path = "week1/pySuccessMessage.json"
-    success_message = open(file_path, mode)
-    response = success_message.read()
-    success_message.close()
-
-    return response.strip()
+    file_ = open(path, mode)
+    dict_ = file_.read().strip(" \n\t")
+    return(dict_)
 
 
 def get_some_details():
@@ -56,10 +54,14 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       data["results"][0]["name"]["last"],
-            "password":       data["results"][0]["login"]["password"],
-            "postcodePlusID": int(data["results"][0]["location"]["postcode"]) +
-            int(data["results"][0]["id"]["value"])
+    lastName = data["results"][0]["name"]["last"]
+    password = data["results"][0]["login"]["password"]
+    postcode = int(data["results"][0]["location"]["postcode"])
+    id_result = int(data["results"][0]["id"]["value"])
+    postcodePlusID = postcode + id_result
+    return {"lastName":       lastName,
+            "password":       password,
+            "postcodePlusID": postcodePlusID
             }
 
 
@@ -95,19 +97,25 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    URL = "http://www.setgetgo.com/randomword/get.php?len="
-    my_pyramid = []
+    # you want to order the string name according to shortest to longest
+    # get = take something from internet
+    # push = give it back to the internet
+
+    import requests
+    baseURL = "http://randomword.setgetgo.com/get.php?len="
+    make_pyramid = []
     for i in range(3, 21, 2):
-        url = URL + str(i)
-        response = requests.get(url)
-        message = response.text
-        my_pyramid.append(message)
+        url = baseURL + str(i)
+        r = requests.get(url)
+        message = r.text
+        make_pyramid.append(message)
     for i in range(20, 3, -2):
-        url = URL + str(i)
-        response = requests.get(url)
-        message = response.text
-        my_pyramid.append(message)
-        return my_pyramid
+        url = baseURL + str(i)
+        r = requests.get(url)
+        message = r.text
+        make_pyramid.append(message)
+    # print(make_pyramid)
+    return make_pyramid
 
 
 def wunderground():
@@ -122,7 +130,7 @@ def wunderground():
          variable and then future access will be easier.
     """
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "df74b9060e4000f1"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
@@ -130,11 +138,14 @@ def wunderground():
     r = requests.get(url)
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
-
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    state = obs["display_location"]["state"]
+    latitude = obs["observation_location"]["latitude"]
+    longitude = obs["observation_location"]["longitude"]
+    local_tz_offset = obs["local_tz_offset"]
+    return {"state":           state,
+            "latitude":        latitude,
+            "longitude":       longitude,
+            "local_tz_offset": local_tz_offset}
 
 
 def diarist():
@@ -150,7 +161,12 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    mode = "w"
+    file_path = LOCAL + "/lasers.pew"
+    laser_stop = open(file_path, mode)
+    answer = "6"
+    laser_stop.write(answer)
+    laser_stop.close()
 
 
 if __name__ == "__main__":
