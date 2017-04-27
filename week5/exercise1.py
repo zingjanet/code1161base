@@ -61,7 +61,18 @@ def do_bunch_of_bad_things():
 # return a lit of countdown messages, much like in the bad function above.
 # It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
-    pass
+    """Return a countdown message."""
+    cntdwn_list = []
+    if start > stop:
+        step = -1
+    elif start == stop:
+        return(completion_message)
+    else:
+        step = 1
+    for i in range(start, stop, step):
+        cntdwn_list.append(message + " {}".format(i))
+    cntdwn_list.append(completion_message)
+    return(cntdwn_list)
 
 
 # TRIANGLES
@@ -74,39 +85,46 @@ def countdown(message, start, stop, completion_message):
 # The stub functions are made for you, and each one is tested, so this should
 # hand hold quite nicely.
 def calculate_hypotenuse(base, height):
-    hypotenuse = math.sqrt(base**2 + height**2)
+    """Return the triangle's hypotenuse."""
+    hypotenuse = (base**2 + height**2)**(1/2.0)
     return hypotenuse
 
 
 def calculate_area(base, height):
-    area = 0.5 * base * height
-    return area
+    """Return the triangle's area."""
+    area = (base * height)/2
+    return(area)
 
 
 def calculate_perimeter(base, height):
-    perimeter = base + height + calculate_hypotenuse(base. height)
-    return perimeter
+    """Return the triangle's perimeter."""
+    perimeter = calculate_hypotenuse(base, height) + base + height
+    return(perimeter)
 
 
 def calculate_aspect(base, height):
+    """Aspect is to determine the type of triangle."""
     if height > base:
         return "tall"
-    elif height < base:
-        return "wide"
-    else:
+    elif height == base:
         return "equal"
+    else:
+        return "wide"
 
 
 # Make sure you reuse the functions you've already got
 # Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
-    return {"area": None,
-            "perimeter": None,
-            "height": None,
-            "base": None,
-            "hypotenuse": None,
-            "aspect": None,
-            "units": None}
+    """Returning a dictionary.
+    { means dictionary, [] means list
+    """
+    return {"area": calculate_area(base, height),
+            "perimeter": calculate_perimeter(base, height),
+            "height": height,
+            "base": base,
+            "hypotenuse": calculate_hypotenuse(base, height),
+            "aspect": calculate_aspect(base, height),
+            "units": units}
 
 
 # this should return a multi line string that looks a bit like this:
@@ -184,20 +202,10 @@ def triangle_master(base,
 
 
 def wordy_pyramid():
-    import requests
-    baseURL = "http://www.setgetgo.com/randomword/get.php?len="
-    pyramid_list = []
-    for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
-    for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
-    return pyramid_list
+    """Create a list of words which increase in length then decrease."""
+    pyramid_list = list_of_words_with_lengths(range(3, 21, 2))
+    pyramid_list2 = list_of_words_with_lengths(range(20, 3, -2))
+    return (pyramid_list + pyramid_list2)
 
 
 def get_a_word_of_length_n(length):
@@ -209,7 +217,12 @@ def get_a_word_of_length_n(length):
 
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    """Create a list of words of length specfied from URL."""
+    wordList = []
+    for length in list_of_lengths:
+        word = get_a_word_of_length_n(length)
+        wordList.append(word)
+    return wordList
 
 
 if __name__ == "__main__":
