@@ -28,7 +28,13 @@ def success_is_relative():
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
-    pass
+    mode = "r"
+    file_path = "week1/pySuccessMessage.json"
+    success_message = open(file_path, mode)
+    response = success_message.read()
+    success_message.close()
+
+    return response.strip()
 
 
 def get_some_details():
@@ -50,9 +56,10 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    return {"lastName":       data["results"][0]["name"]["last"],
+            "password":       data["results"][0]["login"]["password"],
+            "postcodePlusID": int(data["results"][0]["location"]["postcode"]) +
+            int(data["results"][0]["id"]["value"])
             }
 
 
