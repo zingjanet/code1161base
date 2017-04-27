@@ -95,7 +95,19 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    pass
+    URL = "http://www.setgetgo.com/randomword/get.php?len="
+    my_pyramid = []
+    for i in range(3, 21, 2):
+        url = URL + str(i)
+        response = requests.get(url)
+        message = response.text
+        my_pyramid.append(message)
+    for i in range(20, 3, -2):
+        url = URL + str(i)
+        response = requests.get(url)
+        message = response.text
+        my_pyramid.append(message)
+        return my_pyramid
 
 
 def wunderground():
