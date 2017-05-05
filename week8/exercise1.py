@@ -153,7 +153,7 @@ def random_filler_text(number_of_words=200):
     Bonus: extra mark if you get the paragraph to start with a
            capital letter and end with a full stop.
     """
-    import random
+    # import random
     pass
 
 
