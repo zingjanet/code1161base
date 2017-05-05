@@ -9,7 +9,7 @@ You've got an hour.
 """
 from __future__ import division
 from __future__ import print_function
-import time
+# import time
 
 
 def greet(name="Towering Timmy"):
@@ -92,8 +92,8 @@ def best_letter_for_pets():
     Reusing the pet_filter, find the letter that gives the longest list of pets
     TIP: return just a letter, not the list of animals.
     """
-    import string
-    the_alphabet = string.lowercase
+    # import string
+    # the_alphabet = string.lowercase
     pass
 
 
@@ -111,7 +111,7 @@ def make_filler_text_dictionary():
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     TIP: you'll need the requests library
     """
-    import requests
+    # import requests
     pass
 
 
@@ -127,7 +127,7 @@ def random_filler_text(number_of_words=200):
     Bonus: extra mark if you get the paragraph to start with a
            capital letter and end with a full stop.
     """
-    import random
+    # import random
     pass
 
 
