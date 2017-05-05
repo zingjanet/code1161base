@@ -102,16 +102,18 @@ def best_letter_for_pets():
     """
     import string
     the_alphabet = string.lowercase
-    letter_list = []
-    aband_list = []
+    len_list = []
     temp_list = []
+    the_best = 0
     for i in range(len(the_alphabet)):
         temp_list = pet_filter(letter=the_alphabet[i])
-        if temp_list == []:
-            aband_list.append(the_alphabet[i])
+        len_list.append(len(temp_list))
+        if len_list[i] > the_best:
+            the_best = len_list[i]
+            the_letter = the_alphabet[i]
         else:
-            letter_list.append(the_alphabet[i])
-    return letter_list
+            the_best = the_best
+    return the_letter
 
 
 def make_filler_text_dictionary():
