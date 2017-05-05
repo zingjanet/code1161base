@@ -46,16 +46,14 @@ def fizz_buzz():
     if it is. E.g. [1, 2, "Fizz", 4, "Buzz", 6, 7, ...]
     """
     fizzBuzzList = []
-    # your code here
-    for i in range(1, 100):
-        if i % 3 == 0:
-            fizzBuzzList.append("Fizz")
+    for i in range(1, 101):
+        if i % 3 == 0 and i % 5 == 0:
+            fizzBuzzList.append("FizzBuzz")
         elif i % 5 == 0:
             fizzBuzzList.append("Buzz")
-        elif i % 3 == 0 and i % 5 == 0:
-            fizzBuzzList.append("FizzBuzz")
+        elif i % 3 == 0:
+            fizzBuzzList.append("Fizz")
         else:
-            print (i)
             fizzBuzzList.append(i)
     return fizzBuzzList
 
