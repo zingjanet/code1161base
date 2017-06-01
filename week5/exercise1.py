@@ -28,38 +28,6 @@ from __future__ import division
 from __future__ import print_function
 
 
-# This is a terrible function. The rest of the functions in this file do a
-# much better job of what it's trying to do. Once you've has a little look,
-# move on, and eventually delete this function. (And this comment!)
-def do_bunch_of_bad_things():
-    print("Getting ready to start in 9")
-    print("Getting ready to start in 8")
-    print("Getting ready to start in 7")
-    print("Getting ready to start in 6")
-    print("Getting ready to start in 5")
-    print("Getting ready to start in 4")
-    print("Getting ready to start in 3")
-    print("Getting ready to start in 2")
-    print("Getting ready to start in 1")
-    print("Let's go!")
-
-    triangle = {"base": 3, "height": 4}
-    triangle["hypotenuse"] = triangle["base"]**2 + triangle["height"]**2
-    print("area = " + str((triangle["base"] * triangle["height"])/2))
-    print("side lengths are:")
-    print("base: {}".format(triangle["base"]))
-    print("height: {}".format(triangle["height"]))
-    print("hypotenuse: {}".format(triangle["hypotenuse"]))
-
-    another_hyp = 5**2 + 6**2
-    print(another_hyp)
-
-    yet_another_hyp = 40**2 + 30**2
-    print(yet_another_hyp)
-
-
-# return a lit of countdown messages, much like in the bad function above.
-# It should say something different in the last message.
 def countdown(message, start, stop, completion_message):
     """Return a countdown message."""
     cntdwn_list = []
@@ -112,12 +80,8 @@ def calculate_aspect(base, height):
         return "wide"
 
 
-# Make sure you reuse the functions you've already got
-# Don't reinvent the wheel
 def get_triangle_facts(base, height, units="mm"):
-    """Returning a dictionary.
-    { means dictionary, [] means list
-    """
+    """DOCSTRING."""
     return {"area": calculate_area(base, height),
             "perimeter": calculate_perimeter(base, height),
             "height": height,
@@ -127,23 +91,8 @@ def get_triangle_facts(base, height, units="mm"):
             "units": units}
 
 
-# this should return a multi line string that looks a bit like this:
-#
-# 15
-# |
-# |     |\
-# |____>| \  17.0
-#       |  \
-#       |   \
-#       ------
-#       8
-# This triangle is 60.0mm²
-# It has a perimeter of 40.0mm
-# This is a tall triangle.
-#
-# but with the values and shape that relate to the specific
-# triangle we care about.
 def tell_me_about_this_right_triangle(facts_dictionary):
+    """DOCSTRING."""
     tall = """
             {height}
             |
@@ -189,6 +138,7 @@ def triangle_master(base,
                     height,
                     return_diagram=False,
                     return_dictionary=False):
+    """DOCSTRING."""
     dictionary = get_triangle_facts(base, height)
     diagram = tell_me_about_this_right_triangle(dictionary)
     if return_diagram and return_dictionary:
@@ -202,13 +152,14 @@ def triangle_master(base,
 
 
 def wordy_pyramid():
-    """Create a list of words which increase in length then decrease."""
+    """DOCSTRING."""
     pyramid_list = list_of_words_with_lengths(range(3, 21, 2))
     pyramid_list2 = list_of_words_with_lengths(range(20, 3, -2))
     return (pyramid_list + pyramid_list2)
 
 
 def get_a_word_of_length_n(length):
+    """DOCSTRING."""
     import requests
     baseURL = "http://www.setgetgo.com/randomword/get.php?len="
     url = baseURL + str(length)
@@ -217,7 +168,7 @@ def get_a_word_of_length_n(length):
 
 
 def list_of_words_with_lengths(list_of_lengths):
-    """Create a list of words of length specfied from URL."""
+    """DOCSTRING."""
     wordList = []
     for length in list_of_lengths:
         word = get_a_word_of_length_n(length)
@@ -226,4 +177,4 @@ def list_of_words_with_lengths(list_of_lengths):
 
 
 if __name__ == "__main__":
-    do_bunch_of_bad_things()
+    print("...")
