@@ -97,25 +97,21 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    # you want to order the string name according to shortest to longest
-    # get = take something from internet
-    # push = give it back to the internet
+    pyramid = []
+    URL = "http://www.setgetgo.com/randomword/get.php?len="
 
-    import requests
-    baseURL = "http://randomword.setgetgo.com/get.php?len="
-    make_pyramid = []
     for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        make_pyramid.append(message)
-    for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        make_pyramid.append(message)
-    # print(make_pyramid)
-    return make_pyramid
+        r = requests.get(URL + str(i))
+        word = r.text
+        print(word)
+        pyramid.append(word)
+
+    for j in range(20, 3, -2):
+        r = requests.get(URL + str(j))
+        word = r.text
+        print(word)
+        pyramid.append(word)
+        return pyramid
 
 
 def wunderground():
@@ -161,12 +157,17 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    mode = "w"
-    file_path = LOCAL + "/lasers.pew"
-    laser_stop = open(file_path, mode)
-    answer = "6"
-    laser_stop.write(answer)
-    laser_stop.close()
+    inputFile = open('week4/Trispokedovetiles(laser).gcode', 'r')
+    outputFile = open('week4/lasers.pew', 'w')
+
+    count = 0
+
+    for x in inputFile.readlines():
+        if "M10 P1" in x:
+            count = count + 1
+    outputFile.write(str(count))
+    inputFile.close()
+    outputFile.close()
 
 
 if __name__ == "__main__":
