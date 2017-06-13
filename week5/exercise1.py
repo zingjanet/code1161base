@@ -27,6 +27,7 @@ you'll need to figure out for yourself what to do.
 from __future__ import division
 from __future__ import print_function
 import math
+import requests
 
 
 # This is a terrible function. The rest of the functions in this file do a
@@ -121,7 +122,7 @@ def get_triangle_facts(base, height, units="mm"):
 #
 # but with the values and shape that relate to the specific
 # triangle we care about.
-def tell_me_about_this_right_triangle(facts_dictionary):
+def tell_me_about_this_right_triangle(facts_dictionary, **return_query):
     tall = """
             {height}
             |
@@ -151,47 +152,71 @@ def tell_me_about_this_right_triangle(facts_dictionary):
                "This is a {aspect} triangle.\n")
 
     facts = pattern.format(**facts_dictionary)
-    if height > base:
-        triangle
+    tall_diag = tall.format(**facts_dictionary)
+    wide_diag = wide.format(**facts_dictionary)
+    equal_diag = equal.format(**facts_dictionary)
+    if "Both" in return_query:
+        if facts_dictionary["aspect"] == 'tall':
+            return tall_diag + "\n" + facts
+        elif facts_dictionary["aspect"] == 'wide':
+            return wide_diag + "\n" + facts
+        else:
+            return equal_diag + "\n" + facts
+    elif "Dict" in return_query:
+        return facts
+    elif "Diag" in return_query:
+        if facts_dictionary["aspect"] == 'tall':
+            return tall_diag
+        elif facts_dictionary["aspect"] == 'wide':
+            return wide_diag
+        else:
+            return equal_diag
+    else:
+        if facts_dictionary["aspect"] == 'tall':
+            return tall_diag + "\n" + facts
+        elif facts_dictionary["aspect"] == 'wide':
+            return wide_diag + "\n" + facts
+        else:
+            return equal_diag + "\n" + facts
 
 
 def triangle_master(base,
                     height,
                     return_diagram=False,
                     return_dictionary=False):
+    dictionary = get_triangle_facts(base, height)
+    same_message = {"dict": dictionary,
+                    "diagram": tell_me_about_this_right_triangle(dictionary,
+                                                                 Both="Yes")}
     if return_diagram and return_dictionary:
-        return None
+        return same_message
     elif return_diagram:
-        return None
+        return tell_me_about_this_right_triangle(dictionary, Diag="Yes")
     elif return_dictionary:
-        return None
+        return {'facts': dictionary}
     else:
-        print("You're an odd one, you don't want anything!")
+        print("Ooooops!")
 
 
 def wordy_pyramid():
-    import requests
-    baseURL = "http://www.setgetgo.com/randomword/get.php?len="
-    pyramid_list = []
-    for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
-    for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        pyramid_list.append(message)
-    return pyramid_list
+    word_list = range(3, 20, 2) + range(20, 2, -2)
+    return list_of_words_with_lengths(word_list)
 
 
 def get_a_word_of_length_n(length):
-    pass
+    url = "http://setgetgo.com/randomword/get.php?len="
+    if 3 <= length <= 20:
+        length = length*1
+        r = requests.get(url + str(length))
+        return str(r.content)
 
 
 def list_of_words_with_lengths(list_of_lengths):
-    pass
+    print(list_of_lengths)
+    word_list = []
+    for x in list_of_lengths:
+        word_list.append(get_a_word_of_length_n(x))
+    return word_list
 
 
 if __name__ == "__main__":
